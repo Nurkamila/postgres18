@@ -87,7 +87,7 @@ CREATE TABLE country (
     gimn text,
     flag_id int unique
 
-    constraint fk_country_flag foreign key flag_id references flag(id)
+    constraint fk_country_flag foreign key (flag_id) references flag(id)
 );
 ```
 ### One to many
@@ -106,7 +106,7 @@ CREATE TABLE post (
     photo text,
     account_id int
 
-    constraint fk_account_post foreign key account_id references flag(id)
+    constraint fk_account_post foreign key (account_id) references flag(id)
 );
 ```
 
@@ -129,9 +129,11 @@ CREATE TABLE doctor_patient (
     doctor_id int,
     patient_id int,
 
-    constraint fk_doctor foreign key doctor_id references doctor(id),
+    constraint fk_doctor 
+    foreign key (doctor_id) references doctor(id),
 
-    constraint fk patient foreign key patient_id references patient(id)
+    constraint fk patient 
+    foreign key (patient_id) references patient(id)
 );
 ```
 
