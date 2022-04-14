@@ -137,17 +137,43 @@ CREATE TABLE doctor_patient (
 );
 ```
 
-# JOINS
+# JOINS (теория)
 > JOIN - инструкция, которая позволяет в запросах SELECT извлекать данные из нескольких таблиц
 > INNER JOIN (JOIN)- когда достаются только те записи, у которых есть полная связь
 > FULL JOIN - когда достаются абсолютно все записи со всех таблиц
 > LEFT JOIN - когда достаются все записи с "левой" таблицы и так же те записи с полной связью
 > RIGHT JOIN - когда достаются все записи с "правой" таблицы и так же те записи с полной связью
 
+##  JOIN (практика)
+
 ```SQL
 SELECT author.first_name, book.title
 FROM author
 JOIN book ON author.id = book.author_id
+```
+
+### join one to one
+```sql
+SELECT country.title, country.gimn, flag.photo
+FROM country 
+JOIN flag
+ON country.flag_id = flag.id;
+```
+
+### join one to many
+```sql
+SELECT account.nickname, post.title, post.photo
+FROM account
+JOIN post
+ON account.id = post.account_id;
+```
+
+### join many to many
+```sql
+SELECT doctor.first_name as Doctor, patient.first_name as Patient\
+FROM doctor
+JOIN doctor_patient as dp ON doctor.id = dp.doctor_id
+JOIN patient ON patient.id = dp.patient_id;
 ```
 
 # Import Export данных
