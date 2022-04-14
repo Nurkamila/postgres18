@@ -22,7 +22,7 @@
 INSERT INTO name_of_table (name_of_column1, name_of_column2) VALUES (val1, val2); - добавляет запись в таблицу
 
 SELECT * FROM name_of_table; - достает все поля и записи из таблицы
-SELECT name_of_column1, name_of_column2 FROM name_of_table; - достает только указанные столбцы из таблицы
+SELECT name_of_column1, name_of_column2 FROM name_of_table; - доста ет только указанные столбцы из таблицы
 
 # связи
 # pk, fk
@@ -85,7 +85,9 @@ CREATE TABLE country (
     id serial primary key,
     title varchar(50),
     gimn text,
-    flag_id int unique foreign key fk_country_flag references flag(id)
+    flag_id int unique
+
+    constraint fk_country_flag foreign key flag_id references flag(id)
 );
 ```
 ### One to many
@@ -102,7 +104,9 @@ CREATE TABLE post (
     title varchar(100),
     body text,
     photo text,
-    account_id int foreign key fk_account_post references account(id)
+    account_id int
+
+    constraint fk_account_post foreign key account_id references flag(id)
 );
 ```
 
@@ -122,9 +126,12 @@ CREATE TABLE patient (
 );
 
 CREATE TABLE doctor_patient (
-    doctor_id int foreign key fk_doctor references doctor(id),
+    doctor_id int,
+    patient_id int,
 
-    patient_id int foreign key fk_patient references patient(id)
+    constraint fk_doctor foreign key doctor_id references doctor(id),
+
+    constraint fk patient foreign key patient_id references patient(id)
 );
 ```
 
